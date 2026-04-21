@@ -1,0 +1,30 @@
+name: Hello GitHub Actions
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  saludo:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout del código
+        uses: actions/checkout@v4
+
+      - name: Imprimir saludo
+        run: echo "Hola desde GitHub Actions!"
+
+      - name: Mostrar información del runner
+        run: |
+          echo "Sistema operativo: $RUNNER_OS"
+          echo "Rama: $GITHUB_REF_NAME"
+          echo "Actor: $GITHUB_ACTOR"
+
+      - name: Usar un Secret
+        run: echo "El secret está configurado correctamente"
+        env:
+          MI_SECRET: ${{ secrets.PHASE2 }}
